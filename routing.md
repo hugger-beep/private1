@@ -2,7 +2,7 @@
 
 ## Current Routing Challenge
 
-MFIQ currently operates in a single region (ca-central-1), but needs to expand to multiple regions while ensuring users are directed to the appropriate regional backend based on their organization's data residency requirements. This document outlines a strategy for optimizing regional routing to provide low-latency access while maintaining data residency compliance.
+customer currently operates in a single region (ca-central-1), but needs to expand to multiple regions while ensuring users are directed to the appropriate regional backend based on their organization's data residency requirements. This document outlines a strategy for optimizing regional routing to provide low-latency access while maintaining data residency compliance.
 
 ## Proposed Regional Routing Architecture
 
@@ -319,4 +319,4 @@ graph TD
 
 ## Conclusion
 
-The proposed regional routing optimization strategy provides MFIQ with a robust, efficient approach to directing users to the appropriate regional backend while maintaining low latency and high availability. By leveraging AWS global services like Global Accelerator and Route 53 combined with intelligent routing logic, the architecture ensures optimal performance while meeting data residency requirements.
+The proposed regional routing optimization strategy provides customer with a robust, efficient approach to directing users to the appropriate regional backend while maintaining low latency and high availability. By leveraging AWS global services like Global Accelerator and Route 53 combined with intelligent routing logic, the architecture ensures optimal performance while meeting data residency requirements.
