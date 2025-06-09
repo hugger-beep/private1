@@ -1,4 +1,4 @@
-# Cognito/SSO Strategy for MFIQ
+# Cognito/SSO Strategy for ###
 
 ## Current Authentication System
 
