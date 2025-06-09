@@ -2,7 +2,7 @@
 
 ## Current Authentication System
 
-MFIQ currently uses a custom authentication system built on Laravel:
+### Customer currently uses a custom authentication system built on Laravel:
 - Username/password capture via API backend
 - MFA code sent via email (Mailgun)
 - JWT Access Token issued upon successful authentication
@@ -210,4 +210,4 @@ Support for enterprise identity federation:
 
 ## Conclusion
 
-The proposed Cognito/SSO strategy provides MFIQ with a robust, scalable authentication solution that addresses current limitations while enabling future capabilities like enterprise SSO. The multi-region approach ensures data residency requirements are met while providing a seamless authentication experience for users regardless of their location or organization's chosen region.
+The proposed Cognito/SSO strategy provides customer with a robust, scalable authentication solution that addresses current limitations while enabling future capabilities like enterprise SSO. The multi-region approach ensures data residency requirements are met while providing a seamless authentication experience for users regardless of their location or organization's chosen region.
