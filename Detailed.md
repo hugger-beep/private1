@@ -23,7 +23,7 @@ graph TD
     subgraph "Data Layer"
         RDSProxy[RDS Proxy]
         RDS[RDS Database]
-        DW[Glue Data Warehouse]
+        DW[DI Data Warehouse]
         
         subgraph "ETL Processes"
             TransETL[Transaction Data Glue ETL]
@@ -58,4 +58,5 @@ graph TD
     ManualUpdate --> DW
     
     XACTDataAPI --> TransETL
+    XACTDataAPI --> MasterETL
 ```
