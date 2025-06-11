@@ -109,10 +109,10 @@ graph TD
         USQS[QuickSight - US]
     end
     
-    MobileApp --> CloudFront
-    WebApp --> CloudFront
-    CloudFront --> Route53
-    Route53 --> RouterAPI
+    MobileApp --> Route53
+    WebApp --> Route53
+    Route53 --> CloudFront
+    CloudFront --> RouterAPI
     
     RouterAPI --> RouterLambda
     RouterLambda --> GlobalDDB
@@ -139,6 +139,8 @@ graph TD
     USRDS --> USSecureSync
     USSecureSync --> USDW
 ```
+
+> **Note**: The diagram has been corrected to show the proper flow: Client → Route 53 → CloudFront → API Gateway
 
 ## 2. Cognito-Based Authentication System
 
@@ -184,6 +186,38 @@ graph TD
 - Transparent redirection to region-specific resources
 - Maintains data residency by routing to appropriate regional stack
 
+**Organization-to-Region Mapping Example:**
+
+The DynamoDB Global Table would contain entries like:
+
+```json
+{
+  "organizationId": "org-123456",
+  "organizationName": "Acme Corporation",
+  "preferredRegion": "ca-central-1",
+  "dataResidencyRequirement": "Canada",
+  "createdAt": "2023-01-15T12:00:00Z",
+  "updatedAt": "2023-01-15T12:00:00Z"
+}
+
+{
+  "organizationId": "org-789012",
+  "organizationName": "Global Enterprises",
+  "preferredRegion": "us-east-1",
+  "dataResidencyRequirement": "US",
+  "createdAt": "2023-02-20T14:30:00Z",
+  "updatedAt": "2023-03-10T09:15:00Z"
+}
+```
+
+**Request Flow Explanation:**
+
+1. User makes a request to your application domain (app.mfiq.com)
+2. Route 53 resolves the domain to the CloudFront distribution
+3. CloudFront serves static content and forwards API requests to the Router API Gateway
+4. Router Lambda looks up the user's organization in the Global DynamoDB table
+5. Based on the organization's preferred region, the Router redirects to the appropriate regional stack
+
 ### 2. Cognito-Based Authentication
 
 **Current Issue:** Custom authentication system lacks scalability and SSO capabilities.
@@ -199,6 +233,112 @@ graph TD
 - Support for future SSO requirements
 - Consistent authentication experience across regions
 - Reduced maintenance burden for authentication code
+
+**Custom Email MFA Implementation:**
+
+While Cognito does offer built-in MFA via SMS or TOTP (authenticator apps), it doesn't natively support email-based MFA. To maintain your current email MFA flow:
+
+1. **Create a Custom Authentication Flow:**
+   - Use Cognito's Custom Authentication Challenge Lambda Triggers
+   - Implement three Lambda functions:
+     - `DefineAuthChallenge`: Controls the authentication flow
+     - `CreateAuthChallenge`: Generates and emails the MFA code
+     - `VerifyAuthChallenge`: Verifies the user's response
+
+2. **Email MFA Code Generation:**
+```python
+# CreateAuthChallenge Lambda
+import json
+import boto3
+import random
+import os
+
+def lambda_handler(event, context):
+    # Generate a random 6-digit code
+    code = str(random.randint(100000, 999999))
+    
+    # Store the code in a secure way (with encryption)
+    event['response'] = {
+        'privateChallengeParameters': {'code': code}
+    }
+    
+    # Get user email
+    email = event['request']['userAttributes']['email']
+    
+    # Send email using SES or your existing email provider
+    send_email_with_code(email, code)
+    
+    # Return the challenge to the user
+    event['response']['publicChallengeParameters'] = {
+        'email': email
+    }
+    
+    return event
+
+def send_email_with_code(email, code):
+    # Example using AWS SES
+    ses = boto3.client('ses')
+    
+    subject = "Your verification code"
+    body = f"Your verification code is: {code}"
+    
+    ses.send_email(
+        Source=os.environ['FROM_EMAIL'],
+        Destination={'ToAddresses': [email]},
+        Message={
+            'Subject': {'Data': subject},
+            'Body': {'Text': {'Data': body}}
+        }
+    )
+```
+
+**Cognito Attributes and Groups for Organization Structure:**
+
+Cognito allows you to store custom attributes and assign users to groups, which can be used to model your organization structure:
+
+1. **Custom Attributes:**
+   - `custom:organizationId`: The organization the user belongs to
+   - `custom:businessUnitIds`: Comma-separated list of business unit IDs
+   - `custom:locationIds`: Comma-separated list of location IDs
+   - `custom:userRole`: Role within the organization (e.g., "student", "employer")
+
+2. **Cognito Groups:**
+   - Create groups for major role categories (e.g., "Employers", "Students")
+   - Groups can be used for coarse-grained access control
+
+3. **Adding Claims to Tokens:**
+   - Use a Pre-Token Generation Lambda trigger to add custom claims to the JWT tokens:
+
+```python
+# Pre-Token Generation Lambda
+def lambda_handler(event, context):
+    # Get user attributes
+    user_attributes = event.get('userAttributes', {})
+    
+    # Add custom claims to the token
+    event['response'] = {
+        'claimsOverrideDetails': {
+            'claimsToAddOrOverride': {
+                'organization': user_attributes.get('custom:organizationId', ''),
+                'businessUnits': user_attributes.get('custom:businessUnitIds', ''),
+                'locations': user_attributes.get('custom:locationIds', ''),
+                'role': user_attributes.get('custom:userRole', '')
+            },
+            'groupOverrideDetails': {
+                'groupsToOverride': event['request']['groupConfiguration']['groupsToOverride'],
+                'iamRolesToOverride': event['request']['groupConfiguration']['iamRolesToOverride'],
+                'preferredRole': event['request']['groupConfiguration']['preferredRole']
+            }
+        }
+    }
+    
+    return event
+```
+
+4. **Downstream Authorization:**
+   - API Gateway Authorizers can extract and validate these claims
+   - Your microservices can use these claims for fine-grained authorization
+   - QuickSight can use these attributes for row-level security
 
 ### 3. Regional Data Isolation
 
