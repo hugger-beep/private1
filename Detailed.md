@@ -1,6 +1,7 @@
 ## Detailed System Architecture
 
 ```mermaid
+
 graph TD
     subgraph "Client Layer"
         DIWebApp[DI WebApp]
