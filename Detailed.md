@@ -140,7 +140,7 @@ graph TD
     USSecureSync --> USDW
 ```
 
-> **Note**: The diagram has been corrected to show the proper flow: Client → Route 53 → CloudFront → API Gateway
+> **Note**:
 
 ## 2. Cognito-Based Authentication System
 
