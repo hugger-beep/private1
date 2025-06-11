@@ -62,6 +62,6 @@ graph TD
     TransETL --> DW
     MasterETL --> RDS
     ManualUpdate --> DW
-    
+```
     % External connections
     XACTDataAPI --> TransETL
