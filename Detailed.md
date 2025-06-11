@@ -1,3 +1,4 @@
+## Detailed System Architecture
 
 ```mermaid
 graph TD
@@ -12,7 +13,6 @@ graph TD
     
     subgraph "Authentication Layer"
         AuthMicro[Authentication Microservice Lambda]
-        XACIAuth[XACI Authentication API]
     end
     
     subgraph "Reporting Layer"
@@ -35,13 +35,13 @@ graph TD
     
     subgraph "External Systems"
         XACTDataAPI[XACT Data APIs]
+        XACIAuth[XACI Authentication API]
     end
     
     DIWebApp --> APIGateway
     
     APIGateway --> AuthMicro
     APIGateway --> ReportMicro
-    APIGateway --> APIAuth
     
     AuthMicro --> XACIAuth
     AuthMicro --> RDSProxy
@@ -58,5 +58,4 @@ graph TD
     ManualUpdate --> DW
     
     XACTDataAPI --> TransETL
-
 ```
