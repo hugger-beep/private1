@@ -23,10 +23,10 @@ flowchart TB
         Database2[(Regional Database)]
     end
     
-    User -- "1. Authenticate" --> Cognito
-    Cognito -- "2. Trigger" --> PreTokenLambda
-    PreTokenLambda -- "3. Add Region to Claims" --> Cognito
-    Cognito -- "4. Return JWT with Region" --> User
+    User --> Cognito
+    Cognito --> PreTokenLambda
+    PreTokenLambda --> Cognito
+    Cognito --> User
     
     User -- "5a. API Request with JWT" --> APIGateway1
     User -- "5b. API Request with JWT" --> APIGateway2
