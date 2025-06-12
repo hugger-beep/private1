@@ -212,7 +212,7 @@ The DynamoDB Global Table would contain entries like:
 
 **Request Flow Explanation:**
 
-1. User makes a request to your application domain (app.mfiq.com)
+1. User makes a request to your application domain (app.example.com)
 2. Route 53 resolves the domain to the CloudFront distribution
 3. CloudFront serves static content and forwards API requests to the Router API Gateway
 4. Router Lambda looks up the user's organization in the Global DynamoDB table
