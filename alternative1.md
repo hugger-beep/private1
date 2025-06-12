@@ -47,3 +47,41 @@ flowchart TB
     class APIGateway1,Authorizer1,Services1,Database1 fill:#bbf,stroke:#333,stroke-width:2px
     class APIGateway2,Authorizer2,Services2,Database2 fill:#bfb,stroke:#333,stroke-width:2px
 ```
+
+
+## Architecture Diagram
+
+```mermaid
+flowchart TB
+    User([User/Application])
+    
+    subgraph "ca-central-1 Region"
+        Cognito[Cognito User Pool]
+        PreTokenLambda[Pre-Token Generation Lambda]
+        APIGateway[API Gateway]
+        Authorizer[Lambda Authorizer]
+        Backend[Backend Services]
+        QuickSight[QuickSight]
+        Database[(Database with RLS)]
+    end
+    
+    User --> |1. Login Request| Cognito
+    Cognito --> |2. Trigger| PreTokenLambda
+    PreTokenLambda --> |3. Add Claims| Cognito
+    Cognito --> |4. JWT Token| User
+    
+    User --> |5. API Request with JWT| APIGateway
+    APIGateway --> |6. Authorize| Authorizer
+    
+    Authorizer --> |7. Policy| APIGateway
+    APIGateway --> |8. Forward Request| Backend
+    
+    Backend --> |9. Query with Location Filter| Database
+    Backend --> |10. Data for Dashboards| QuickSight
+    
+    User --> |11. Access Dashboards| QuickSight
+    
+    class User,Cognito,PreTokenLambda fill:#f9f,stroke:#333,stroke-width:2px
+    class APIGateway,Authorizer,Backend fill:#bbf,stroke:#333,stroke-width:2px
+    class QuickSight,Database fill:#bfb,stroke:#333,stroke-width:2px
+```
