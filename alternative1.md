@@ -65,21 +65,21 @@ flowchart TB
         Database[(Database with RLS)]
     end
     
-    User --> |1. Login Request| Cognito
-    Cognito --> |2. Trigger| PreTokenLambda
-    PreTokenLambda --> |3. Add Claims| Cognito
-    Cognito --> |4. JWT Token| User
+    User --> Cognito
+    Cognito --> PreTokenLambda
+    PreTokenLambda --> Cognito
+    Cognito --> User
     
-    User --> |5. API Request with JWT| APIGateway
-    APIGateway --> |6. Authorize| Authorizer
+    User --> APIGateway
+    APIGateway --> Authorizer
     
-    Authorizer --> |7. Policy| APIGateway
-    APIGateway --> |8. Forward Request| Backend
+    Authorizer --> APIGateway
+    APIGateway --> Backend
     
-    Backend --> |9. Query with Location Filter| Database
-    Backend --> |10. Data for Dashboards| QuickSight
+    Backend --> Database
+    Backend --> QuickSight
     
-    User --> |11. Access Dashboards| QuickSight
+    User --> QuickSight
     
     class User,Cognito,PreTokenLambda fill:#f9f,stroke:#333,stroke-width:2px
     class APIGateway,Authorizer,Backend fill:#bbf,stroke:#333,stroke-width:2px
