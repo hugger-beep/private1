@@ -86,7 +86,7 @@ flowchart TB
     class QuickSight,Database fill:#bfb,stroke:#333,stroke-width:2px
 ```
 
-
+``` mermaid
 flowchart TB
     User([User/Application])
     
@@ -115,4 +115,4 @@ flowchart TB
     class APIGateway,Authorizer,Backend fill:#bbf,stroke:#333,stroke-width:2px
     class Cognito,PreTokenLambda fill:#fbb,stroke:#333,stroke-width:2px
     class QuickSight,Database fill:#bfb,stroke:#333,stroke-width:2px
-
+```
