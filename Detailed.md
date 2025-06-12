@@ -61,7 +61,7 @@ graph TD
     XACTDataAPI --> MasterETL
 ```
 
-# Improved Multi-Region Architecture for MFIQ
+# Improved Multi-Region Architecture for customer
 
 ## Key Architecture Improvements
 
