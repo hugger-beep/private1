@@ -29,7 +29,7 @@ graph TD
             TransETL[Transaction Data Glue ETL]
             MasterETL[Master Data Glue ETL]
             SecureSync[Secure Access Data Sync]
-            ManualUpdate[Manual Exam Data Update]
+            ManualUpdate[Manual Data Update]
         end
     end
     
