@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This document outlines a comprehensive architecture for customer1's employee wellness and resilience training mobile application, focusing on global scaling with specific attention to data residency requirements between the US and Canada. The architecture addresses authentication strategies using AWS Cognito, multi-region deployment, data isolation, and optimized regional routing.
+This document outlines a comprehensive architecture for  resilience mobile application, focusing on global scaling with specific attention to data residency requirements between the US and Canada. The architecture addresses authentication strategies using AWS Cognito, multi-region deployment, data isolation, and optimized regional routing.
 
 ## Current Architecture Overview
 
