@@ -1,4 +1,4 @@
-# customer1 Global Architecture Design
+# Sample Global Architecture Design
 
 ## Executive Summary
 
