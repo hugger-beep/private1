@@ -319,4 +319,4 @@ graph TD
 
 ## Conclusion
 
-The proposed regional routing optimization strategy provides customer with a robust, efficient approach to directing users to the appropriate regional backend while maintaining low latency and high availability. By leveraging AWS global services like Global Accelerator and Route 53 combined with intelligent routing logic, the architecture ensures optimal performance while meeting data residency requirements.
+The proposed regional routing optimization strategy provides a robust, efficient approach to directing users to the appropriate regional backend while maintaining low latency and high availability. By leveraging AWS global services like Global Accelerator and Route 53 combined with intelligent routing logic, the architecture ensures optimal performance while meeting data residency requirements.
