@@ -3,7 +3,7 @@
 ```mermaid
 graph TD
     subgraph "Client Layer"
-        DIWebApp[DI WebApp]
+        DIWebApp[WebApp]
     end
     
     subgraph "API Layer"
@@ -23,7 +23,7 @@ graph TD
     subgraph "Data Layer"
         RDSProxy[RDS Proxy]
         RDS[RDS Database]
-        DW[DI Data Warehouse]
+        DW[Data Warehouse]
         
         subgraph "ETL Processes"
             TransETL[Transaction ETL]
@@ -94,7 +94,7 @@ graph TD
         CAReport[Report Microservice]
         CARDS[RDS - Canada]
         CADW[DI Data Warehouse - Canada]
-        CASecureSync[Secure Access Data Sync]
+        CASecureSync[Data Sync]
         CAQS[QuickSight - Canada]
     end
     
