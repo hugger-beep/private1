@@ -1,65 +1,6 @@
 ## Detailed System Architecture
 
-```mermaid
-graph TD
-    subgraph "Client Layer"
-        DIWebApp[WebApp]
-    end
-    
-    subgraph "API Layer"
-        APIGateway[API Gateway]
-        APIAuth[API Authorizer Lambda]
-    end
-    
-    subgraph "Authentication Layer"
-        AuthMicro[Microservice]
-    end
-    
-    subgraph "Reporting Layer"
-        ReportMicro[Microservice]
-        QS[QuickSight]
-    end
-    
-    subgraph "Data Layer"
-        RDSProxy[RDS Proxy]
-        RDS[RDS Database]
-        DW[Data Warehouse]
-        
-        subgraph "ETL Processes"
-            TransETL[ETL]
-            MasterETL[ ETL]
-            SecureSync[Data Sync]
-            ManualUpdate[Data Update]
-        end
-    end
-    
-    subgraph "External Systems"
-        XACTDataAPI[Data APIs]
-        XACIAuth[Authentication API]
-    end
-    
-    DIWebApp --> APIGateway
-    
-    APIGateway --> AuthMicro
-    APIGateway --> ReportMicro
-    
-    AuthMicro --> XACIAuth
-    AuthMicro --> RDSProxy
-    APIAuth --> RDSProxy
-    
-    ReportMicro --> QS
-    ReportMicro --> APIAuth
-    
-    RDSProxy --> RDS
-    RDS <--> SecureSync
-    SecureSync --> DW
-    TransETL --> DW
-    MasterETL --> RDS
-    ManualUpdate --> DW
-    
-    XACTDataAPI --> TransETL
-    XACTDataAPI --> MasterETL
-```
+
 
 # Improved Multi-Region Architecture for customer
 
