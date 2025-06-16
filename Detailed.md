@@ -34,8 +34,8 @@ graph TD
     end
     
     subgraph "External Systems"
-        XACTDataAPI[XACT Data APIs]
-        XACIAuth[XACI Authentication API]
+        XACTDataAPI[Data APIs]
+        XACIAuth[Authentication API]
     end
     
     DIWebApp --> APIGateway
