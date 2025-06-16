@@ -2,7 +2,7 @@
 
 ## Current Routing Challenge
 
-scenario currently operates in a single region (ca-central-1), but needs to expand to multiple regions while ensuring users are directed to the appropriate regional backend based on their organization's data residency requirements. This document outlines a strategy for optimizing regional routing to provide low-latency access while maintaining data residency compliance.
+This scenario currently operates in a single region (ca-central-1), but needs to expand to multiple regions while ensuring users are directed to the appropriate regional backend based on their organization's data residency requirements. This document outlines a strategy for optimizing regional routing to provide low-latency access while maintaining data residency compliance.
 
 ## Proposed Regional Routing Architecture
 
