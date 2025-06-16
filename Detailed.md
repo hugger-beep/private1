@@ -93,7 +93,7 @@ graph TD
         CAAuth[Authentication Microservice]
         CAReport[Report Microservice]
         CARDS[RDS - Canada]
-        CADW[DI Data Warehouse - Canada]
+        CADW[Data Warehouse - Canada]
         CASecureSync[Data Sync]
         CAQS[QuickSight - Canada]
     end
@@ -104,7 +104,7 @@ graph TD
         USAuth[Authentication Microservice]
         USReport[Report Microservice]
         USRDS[RDS - US]
-        USDW[DI Data Warehouse - US]
+        USDW[Data Warehouse - US]
         USSecureSync[Secure Access Data Sync]
         USQS[QuickSight - US]
     end
