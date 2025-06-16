@@ -4,7 +4,7 @@
 
 ### Customer currently uses a custom authentication system built on Laravel:
 - Username/password capture via API backend
-- MFA code sent via email (Mailgun)
+- MFA code sent via email
 - JWT Access Token issued upon successful authentication
 - All authentication currently in ca-central-1 region
 - Authorization based on device ID, device type, and Access token
