@@ -26,9 +26,9 @@ graph TD
         DW[DI Data Warehouse]
         
         subgraph "ETL Processes"
-            TransETL[Transaction Data Glue ETL]
-            MasterETL[Master Data Glue ETL]
-            SecureSync[Secure Access Data Sync]
+            TransETL[Transaction ETL]
+            MasterETL[Master ETL]
+            SecureSync[Data Sync]
             ManualUpdate[Manual Data Update]
         end
     end
