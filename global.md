@@ -6,7 +6,7 @@ This document outlines a comprehensive architecture for customer1's employee wel
 
 ## Current Architecture Overview
 
-customer1's current architecture is deployed in the ca-central-1 region with:
+sample current architecture is deployed in the ca-central-1 region with:
 - Custom authentication through API backend 
 - MariaDB for transactional data storage
 - PostgreSQL for analytics data
