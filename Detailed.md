@@ -12,11 +12,11 @@ graph TD
     end
     
     subgraph "Authentication Layer"
-        AuthMicro[Authentication Microservice Lambda]
+        AuthMicro[Microservice]
     end
     
     subgraph "Reporting Layer"
-        ReportMicro[Report Microservice]
+        ReportMicro[Microservice]
         QS[QuickSight]
     end
     
@@ -26,10 +26,10 @@ graph TD
         DW[Data Warehouse]
         
         subgraph "ETL Processes"
-            TransETL[Transaction ETL]
-            MasterETL[Master ETL]
+            TransETL[ETL]
+            MasterETL[ ETL]
             SecureSync[Data Sync]
-            ManualUpdate[Manual Data Update]
+            ManualUpdate[Data Update]
         end
     end
     
