@@ -329,6 +329,6 @@ graph TD
 
 ## Conclusion
 
-The proposed architecture provides customer1 with a scalable, secure, and compliant solution for global expansion while meeting data residency requirements. By leveraging AWS global services like Route 53 and Global Accelerator combined with regional services like Cognito and RDS, the architecture ensures optimal performance, security, and compliance across regions.
+The proposed architecture provides  a scalable, secure, and compliant solution for global expansion while meeting data residency requirements. By leveraging AWS global services like Route 53 and Global Accelerator combined with regional services like Cognito and RDS, the architecture ensures optimal performance, security, and compliance across regions.
 
 The phased implementation approach allows for gradual migration from the current architecture to the target state, minimizing disruption to existing users while enabling new capabilities and regional expansion.
